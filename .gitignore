@@ -8,4 +8,8 @@ composer.lock
 .subsplit
 .php_cs.cache
 cghooks.lock
+/jobs
+/temp
+index.php
+
 
