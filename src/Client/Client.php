@@ -2,23 +2,28 @@
 
 namespace GhostWalker\Jobber;
 
-class Jobber
+use JetBrains\PhpStorm\NoReturn;
+
+class JobberClient
 {
     /**
      * @var \React\Socket\Connector
      */
     protected \React\Socket\Connector $connector;
 
-    public function __construct()
+    /**
+     * @param array $settings
+     */
+    public function __construct(array $settings = [])
     {
         $this->connector = new \React\Socket\Connector();
     }
 
     /**
-     * @param mixed $data
+     * @param string $data
      * @return void
      */
-    protected function sendDataToServer(mixed $data): void
+    protected function sendDataToServer(string $data): void
     {
         $this->connector->connect('127.0.0.1:8080')->then(function (\React\Socket\ConnectionInterface $connection) use ($data) {
             $connection->write($data);
