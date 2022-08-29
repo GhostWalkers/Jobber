@@ -1,43 +1,49 @@
-# PHP Package Template
+<h1 align="center">Welcome to Jobber 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://choosealicense.com/licenses/mit/" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+  </a>
+</p>
 
-A template repository for PHP package.
+> Powerful, simple, message queue client
 
-[![Sponsor me](https://github.com/overtrue/overtrue/blob/master/sponsor-me-button-s.svg?raw=true)](https://github.com/sponsors/overtrue)
+## Install
 
-
-## Installing
-
-```shell
-$ composer require vendor/package -vvv
+```sh
+composer glushka
 ```
 
 ## Usage
 
-TODO
+```sh
+composer public vendor...
+```
 
-## :heart: Sponsor me 
+## Run tests
 
-[![Sponsor me](https://github.com/overtrue/overtrue/blob/master/sponsor-me.svg?raw=true)](https://github.com/sponsors/overtrue)
+```sh
+composer test
+```
 
-如果你喜欢我的项目并想支持它，[点击这里 :heart:](https://github.com/sponsors/overtrue)
+## Author
 
-## Project supported by JetBrains
+👤 **GhostWalker**
 
-Many thanks to Jetbrains for kindly providing a license for me to work on this and other open-source projects.
+* Github: [@GhostWalkers](https://github.com/GhostWalkers)
 
-[![](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)](https://www.jetbrains.com/?from=https://github.com/overtrue)
+## 🤝 Contributing
 
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/GhostWalkers/Jobber/issues). 
 
-## Contributing
+## Show your support
 
-You can contribute in one of three ways:
+Give a ⭐️ if this project helped you!
 
-1. File bug reports using the [issue tracker](https://github.com/vendor/package/issues).
-2. Answer questions or fix bugs on the [issue tracker](https://github.com/vendor/package/issues).
-3. Contribute new features or update the wiki.
+## 📝 License
 
-_The code contribution process is not very formal. You just need to make sure that you follow the PSR-0, PSR-1, and PSR-2 coding guidelines. Any new code contributions must be accompanied by unit tests where applicable._
+Copyright © 2022 [GhostWalker](https://github.com/GhostWalkers).<br />
+This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
 
-## License
-
-MIT
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
