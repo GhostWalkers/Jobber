@@ -80,16 +80,15 @@ class JobberServer
     {
         $loop = Loop::get();
 
-        $loop->addPeriodicTimer(1, function (): void {
+        $loop->addPeriodicTimer(5, function (): void {
             if ($this->tasks === []) {
                 return;
             }
 
             foreach ($this->tasks as $key => $data) {
-
                 $obj = new $data[0];
                 $obj->handler($data[1]);
-                unset($key);
+                unset($this->tasks[$key]);
             }
         });
     }

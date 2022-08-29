@@ -11,8 +11,7 @@ cghooks.lock
 /jobs
 /temp
 index.php
-
-
-src/Contracts/JobContract.php
+filescommit/
+src/Contracts/
 src/Server/Handler.php
 src/Server/temp/e1085051ceffe80a6e65b765aba328c0.php
