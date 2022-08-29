@@ -15,20 +15,54 @@
 ## Install
 
 ```sh
-composer glushka
+composer require ghostwalker/jobber
 ```
 
 ## Usage
 
-```sh
-composer public vendor...
+Change bootServer.php file
+
+```php
+GhostWalker\Jobber\JobberServer::bootSystem([
+  'jobDirectory' => __DIR__ . '/jobs', //You directory
+]);
 ```
 
-## Run tests
+Start server
 
 ```sh
-composer test
+php bootServer.php //To keep the process running permanently in the background,
+you should use a process monitor such as Supervisor to ensure that the queue worker does not stop running.
 ```
+
+create a class in the directory you specified and create a "handle" method
+
+with arguments that accepts an array of $date
+
+```php
+<?php
+
+class test {
+    public function handler(array $data)
+    {
+        echo $data[0]; //int(999)
+    }
+}
+```
+
+Create a client class and load a new task
+
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+$jobber = new \GhostWalker\Jobber\JobberClient();
+
+$jobber->addTask(test::class, [999]);
+$jobber->addTask(test1::class, [123]);
+```
+
 
 ## Author
 
