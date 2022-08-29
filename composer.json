@@ -4,8 +4,13 @@
         "nette/robot-loader": "^3.4",
         "react/promise": "~2.0",
         "react/async": "^4.0"
+
     },
     "require-dev": {
-        "symfony/var-dumper": "^6.1"
-    }
+        "symfony/var-dumper": "^6.1",
+        "phpunit/phpunit": "^9.5"
+    },
+    "name": "ghostwalker/jobber",
+    "description": "Powerful, simple, message queue client\n\n",
+    "license": ["mit"]
 }
