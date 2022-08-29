@@ -40,7 +40,7 @@ composer test
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/GhostWalkers/Jobber/issues). 
 
-## 🤝 Contributing
+## Work on
 
 the application is based on [ReactPhp](https://reactphp.org/), as well as a [robot-loader](https://github.com/nette/robot-loader) for loading classes
 
