@@ -4,6 +4,11 @@ namespace GhostWalker\Jobber;
 
 use JetBrains\PhpStorm\NoReturn;
 
+use React\EventLoop\Loop;
+use function React\Async\async;
+use function React\Async\series;
+
+
 class JobberServer
 {
     /**
@@ -21,7 +26,7 @@ class JobberServer
     /**
      * @var array
      */
-    protected array $settings;
+    protected array $settings = [];
 
     /**
      * @param array $settings
@@ -41,6 +46,7 @@ class JobberServer
 
         $this->addJobDirectory();
         $this->bootSocket();
+        $this->loopTask();
     }
 
     /**
@@ -52,7 +58,7 @@ class JobberServer
             $connection->on('data', function ($data) use ($connection) {
                 $connection->close();
                 $data = json_decode($data);
-                $this->addTask($data->classname, $data->data);
+                $this->tasks[] = [$data->classname, $data->data];
             });
         });
     }
@@ -68,14 +74,24 @@ class JobberServer
     }
 
     /**
-     * @param string $className
-     * @param array $data
      * @return void
-     * @throws \ReflectionException
      */
-    protected function addTask(string $className, array $data): void
+    protected function loopTask(): void
     {
-        $obj = new $className;
-        $obj->handler($data);
+        $loop = Loop::get();
+
+        $loop->addPeriodicTimer(1, function (): void {
+            if ($this->tasks === []) {
+                return;
+            }
+
+            foreach ($this->tasks as $key => $data) {
+
+                $obj = new $data[0];
+                $obj->handler($data[1]);
+                unset($key);
+            }
+        });
     }
 }
+

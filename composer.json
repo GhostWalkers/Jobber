@@ -1,7 +1,9 @@
 {
     "require": {
         "react/socket": "^1.12",
-        "nette/robot-loader": "^3.4"
+        "nette/robot-loader": "^3.4",
+        "react/promise": "~2.0",
+        "react/async": "^4.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^6.1"
