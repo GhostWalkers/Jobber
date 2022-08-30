@@ -20,7 +20,7 @@ class JobberClient
      */
     public function __construct(array $settings = [])
     {
-        $this->connector = new \React\Socket\Connector();
+        $this->connector = new \React\Socket\Connector(static::$ipPort);
     }
 
     /**
