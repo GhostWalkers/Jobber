@@ -20,12 +20,21 @@ composer require ghostwalker/jobber
 
 ## Usage
 
-Change bootServer.php file
+Create bootServer.php file in your main directory
+You can also specify the address and port for the server and client, as well as specify the directory where your classes are stored
 
 ```php
-GhostWalker\Jobber\JobberServer::bootSystem([
-  'jobDirectory' => __DIR__ . '/jobs', //You directory
-]);
+<?php
+/**
+ * boot JobberServer Class
+ */
+use GhostWalker\Jobber\JobberServer;
+
+require_once __DIR__ . 'vendor/autoload.php';
+
+JobberServer::$directory = __DIR__ . '/jobs';
+JobberServer::$ipPort = '127.0.0.1:6969';
+JobberServer::bootSystem();
 ```
 
 Start server
@@ -35,7 +44,7 @@ php bootServer.php //To keep the process running permanently in the background,
 you should use a process monitor such as Supervisor to ensure that the queue worker does not stop running.
 ```
 
-create a class in the directory you specified and create a "handle" method
+create a class in the directory you specified and create a "__construct" method
 
 with arguments that accepts an array of $date
 
@@ -43,9 +52,12 @@ with arguments that accepts an array of $date
 <?php
 
 class test {
-    public function handler(array $data)
+    
+    protected array $data = [];
+    
+    public function __construct(array $data)
     {
-        echo $data[0]; //int(999)
+       $this->data = $data //array(int(999))
     }
 }
 ```
@@ -55,10 +67,12 @@ Create a client class and load a new task
 ```php
 <?php
 
+use \GhostWalker\Jobber\JobberClient;
+
 require __DIR__ . '/vendor/autoload.php';
 
-$jobber = new \GhostWalker\Jobber\JobberClient();
-
+JobberClient::$ipPort = '127.0.0.1:6969';
+$jobber = new JobberClient();
 $jobber->addTask(test::class, [999]);
 $jobber->addTask(test1::class, [123]);
 ```

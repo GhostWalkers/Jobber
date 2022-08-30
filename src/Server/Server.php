@@ -89,8 +89,7 @@ class JobberServer
             }
 
             foreach ($this->tasks as $key => $data) {
-                $obj = new $data[0];
-                $obj->handler($data[1]);
+                $obj = new $data[0]($data[1]);
                 unset($this->tasks[$key]);
             }
         });
