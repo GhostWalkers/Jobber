@@ -2,12 +2,8 @@
 
 namespace GhostWalker\Jobber;
 
-use JetBrains\PhpStorm\NoReturn;
 
 use React\EventLoop\Loop;
-use function React\Async\async;
-use function React\Async\series;
-
 
 class JobberServer
 {
@@ -17,16 +13,24 @@ class JobberServer
     protected \Nette\Loaders\RobotLoader $loader;
 
     /**
+     * @var string
+     */
+    public static string $ipPort = '127.0.0.1:8080';
+
+    /**
+     * @var string
+     */
+    public static string $directory = __DIR__ . '/jobs';
+
+    /**
      * @var \React\Socket\SocketServer
      */
     protected \React\Socket\SocketServer $socket;
 
-    protected array $tasks = [];
-
     /**
      * @var array
      */
-    protected array $settings = [];
+    protected array $tasks = [];
 
     /**
      * @param array $settings
@@ -34,15 +38,14 @@ class JobberServer
      */
     public static function bootSystem(array $settings = []): void
     {
-        new self($settings);
+        new self();
     }
 
 
-    public function __construct(array $settings)
+    public function __construct()
     {
         $this->loader = new \Nette\Loaders\RobotLoader();
-        $this->socket = new \React\Socket\SocketServer('127.0.0.1:8080');
-        $this->settings = $settings;
+        $this->socket = new \React\Socket\SocketServer(static::$ipPort);
 
         $this->addJobDirectory();
         $this->bootSocket();
@@ -69,7 +72,7 @@ class JobberServer
     protected function addJobDirectory(): void
     {
         $this->loader->setTempDirectory(__DIR__ . '/temp');
-        $this->loader->addDirectory($this->settings['jobDirectory']);
+        $this->loader->addDirectory(static::$directory);
         $this->loader->register();
     }
 
@@ -80,7 +83,7 @@ class JobberServer
     {
         $loop = Loop::get();
 
-        $loop->addPeriodicTimer(5, function (): void {
+        $loop->addPeriodicTimer(1, function (): void {
             if ($this->tasks === []) {
                 return;
             }

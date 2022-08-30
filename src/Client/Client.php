@@ -2,7 +2,6 @@
 
 namespace GhostWalker\Jobber;
 
-use JetBrains\PhpStorm\NoReturn;
 
 class JobberClient
 {
@@ -10,6 +9,11 @@ class JobberClient
      * @var \React\Socket\Connector
      */
     protected \React\Socket\Connector $connector;
+
+    /**
+     * @var string
+     */
+    public static string $ipPort = '127.0.0.1:8080';
 
     /**
      * @param array $settings
@@ -25,7 +29,7 @@ class JobberClient
      */
     protected function sendDataToServer(string $data): void
     {
-        $this->connector->connect('127.0.0.1:8080')->then(function (\React\Socket\ConnectionInterface $connection) use ($data) {
+        $this->connector->connect(static::$ipPort)->then(function (\React\Socket\ConnectionInterface $connection) use ($data) {
             $connection->write($data);
         }, static function (\Exception $e) {
             throw new \RuntimeException('Error: ' . $e->getMessage() . PHP_EOL);
